@@ -16,7 +16,7 @@ try:
 							next_line = f.readline()
 							if not next_line:
 								break;
-							print(next_line.strip())
+							print(next_line.strip("\n"))
 							time.sleep(0.1)
 						f.close()
 				except:
