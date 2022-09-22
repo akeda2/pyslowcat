@@ -1,9 +1,16 @@
 from ast import Try
 import os
 import time
+import sys
 
 path = './'
 
+# mSec to sleep between printed lines
+SOURCE = 100
+if len(sys.argv) > 1:
+	SOURCE = sys.argv[1]
+
+SLEEPTIME = int(SOURCE) / 1000
 #files = os.listdir(path)
 try:
 	for root, directories, files in os.walk(path, topdown=False):
@@ -17,7 +24,7 @@ try:
 							if not next_line:
 								break;
 							print(next_line.strip("\n"))
-							time.sleep(0.1)
+							time.sleep(SLEEPTIME)
 						f.close()
 				except:
 					pass
