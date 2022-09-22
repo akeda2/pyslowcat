@@ -29,7 +29,8 @@ try:
 				except:
 					pass
 except KeyboardInterrupt:
-	pass
+	#raise SystemExit
+	sys.exit()
 		#print(os.path.join(root, name))
 	#for name in directories:
 	#	print(os.path.join(root, name))
