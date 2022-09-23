@@ -10,8 +10,8 @@ path = './'
 parser = argparse.ArgumentParser(description="slowcat - slow concatenation",
                                   formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("-c", "--char", action="store_true", help="Character mode")
-parser.add_argument("-l", "--line", action="store_true", help="Line mode")
-parser.add_argument("-s", "--sleep", default=50, type=int, help="Time to sleep between lines")
+parser.add_argument("-l", "--line", default=True, action="store_true", help="Line mode")
+parser.add_argument("-s", "--sleep", default=51, type=int, help="Time to sleep between lines")
 parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace")
 args = parser.parse_args()
 config = vars(args)
@@ -46,7 +46,10 @@ while True:
                                         print(char, end='', flush=True)
                                         time.sleep(args.pace)
                                         time.sleep(0.003)
-                                time.sleep(SLEEPTIME)
+                                if args.line and args.sleep == 51:
+                                    time.sleep(SLEEPTIME*2)
+                                else:
+                                    time.sleep(SLEEPTIME)
                             f.close()
                     except:
                         pass
