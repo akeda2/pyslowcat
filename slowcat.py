@@ -114,9 +114,9 @@ def alltree():
                                     time.sleep(SLEEPTIME)
                             f.close()
                     except:
-                        raise
+                        pass
     except:
-        raise
+        pass
 try:
     if args.file:
         while True:
