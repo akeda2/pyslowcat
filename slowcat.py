@@ -10,7 +10,7 @@ import argparse
 parser = argparse.ArgumentParser(description="slowcat - slow concatenation",
                                   formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 #parser.add_argument("filename", default=None, nargs='?', help="Filename, if omitted - walk tree")
-parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r'))
+parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r'), help="Filename. If omitted - walk tree")
 parser.add_argument("-c", "--char", action="store_true", help="Character mode")
 parser.add_argument("-l", "--line", default=True, action="store_true", help="Line mode")
 parser.add_argument("-s", "--sleep", default=51, type=int, help="Time to sleep between lines")
