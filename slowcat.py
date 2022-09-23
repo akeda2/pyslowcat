@@ -10,11 +10,11 @@ import argparse
 parser = argparse.ArgumentParser(description="slowcat - slow concatenation",
                                   formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 #parser.add_argument("filename", default=None, nargs='?', help="Filename, if omitted - walk tree")
-parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r'), help="Filename. If omitted - walk tree")
+parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r'), help="Filename or '-' for stdin. If omitted - walk tree")
 parser.add_argument("-c", "--char", action="store_true", help="Character mode")
 parser.add_argument("-l", "--line", default=True, action="store_true", help="Line mode")
 parser.add_argument("-s", "--sleep", default=51, type=int, help="Time to sleep between lines")
-parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace")
+parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace (sleep between chars)")
 parser.add_argument("-L", "--loop", default=False, action="store_true", help="Loop contents")
 args = parser.parse_args()
 config = vars(args)
@@ -41,6 +41,7 @@ time.sleep(2)
 #SLEEPTIME = int(SOURCE) / 1000
 SLEEPTIME = args.sleep / 1000
 #files = os.listdir(path)
+    
 def onefile():
     while True:
         next_line = args.file.readline()
@@ -118,11 +119,14 @@ def alltree():
     except:
         pass
 try:
+    #if args.file.name == '<stdin>':
+        
     if args.file:
         while True:
-            args.file.seek(0)
+            if not args.file.name == '<stdin>':
+                args.file.seek(0)
             onefile()
-            if not args.loop:
+            if not args.loop or args.file.name == '<stdin>':
                 print("END")
                 break;
         args.file.close()
