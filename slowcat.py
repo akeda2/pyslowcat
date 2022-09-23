@@ -21,7 +21,8 @@ config = vars(args)
 print("slowcat - arguments:")
 print(config)
 
-
+if args.char:
+    args.line = False
 
 #if args.filename:
 #if not args.file:
