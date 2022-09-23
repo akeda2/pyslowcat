@@ -3,15 +3,29 @@ from ast import Try
 import os
 import time
 import sys
+import argparse
 
 path = './'
 
-# mSec to sleep between printed lines
-SOURCE = 100
-if len(sys.argv) > 1:
-	SOURCE = sys.argv[1]
+parser = argparse.ArgumentParser(description="slowcat - slow concatenation",
+                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-c", "--char", action="store_true", help="Character mode")
+parser.add_argument("-l", "--line", action="store_true", help="Line mode")
+parser.add_argument("-s", "--sleep", default=50, type=int, help="Time to sleep between lines")
+parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace")
+args = parser.parse_args()
+config = vars(args)
+print("slowcat - arguments:")
+print(config)
 
-SLEEPTIME = int(SOURCE) / 1000
+# mSec to sleep between printed lines
+#SOURCE = 50
+#if len(sys.argv) > 1:
+#	SOURCE = sys.argv[1]
+
+time.sleep(2)
+#SLEEPTIME = int(SOURCE) / 1000
+SLEEPTIME = args.sleep / 1000
 #files = os.listdir(path)
 while True:
     try:
@@ -25,10 +39,13 @@ while True:
                                 next_line = f.readline()
                                 if not next_line:
                                     break;
-                                #print(next_line.strip("\n"))
-                                for char in next_line:
-                                    print(char, end='', flush=True)
-                                    time.sleep(0.005)
+                                if args.line:
+                                    print(next_line.strip("\n"))
+                                elif args.char:
+                                    for char in next_line:
+                                        print(char, end='', flush=True)
+                                        time.sleep(args.pace)
+                                        time.sleep(0.003)
                                 time.sleep(SLEEPTIME)
                             f.close()
                     except:
