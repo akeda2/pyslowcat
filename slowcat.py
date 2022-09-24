@@ -24,30 +24,16 @@ print(config)
 if args.char:
     args.line = False
 
-#if args.filename:
-#if not args.file:
-    #path = args.filename
-    #path = args.file
-#else:
-#    path = './'
-
-#print(path)
-# mSec to sleep between printed lines
-#SOURCE = 50
-#if len(sys.argv) > 1:
-#	SOURCE = sys.argv[1]
-
 time.sleep(2)
-#SLEEPTIME = int(SOURCE) / 1000
 SLEEPTIME = args.sleep / 1000
-#files = os.listdir(path)
+if args.line and args.sleep == 51:
+    SLEEPTIME *= 2
     
 def onefile():
     while True:
         next_line = args.file.readline()
         if not next_line:
             break;
-            #exit()
         if args.line:
             print(next_line.strip("\n"))
         elif args.char:
@@ -55,19 +41,11 @@ def onefile():
                 print(char, end='', flush=True)
                 time.sleep(args.pace)
                 time.sleep(0.003)
-        if args.line and args.sleep == 51:
-            time.sleep(SLEEPTIME*2)
-        else:
-            time.sleep(SLEEPTIME)
-    #args.file.close()
-#exit()
+        time.sleep(SLEEPTIME)
 
 def oldshit():
-#    if args.filename:
-#if args.file:
     try:
         with open((args.filename), 'r') as f:
-            #print(f.read())
             while True:
                 next_line = f.readline()
                 if not next_line:
@@ -79,17 +57,13 @@ def oldshit():
                         print(char, end='', flush=True)
                         time.sleep(args.pace)
                         time.sleep(0.003)
-                if args.line and args.sleep == 51:
-                    time.sleep(SLEEPTIME*2)
-                else:
-                    time.sleep(SLEEPTIME)
+                time.sleep(SLEEPTIME)
             f.close()
     except:
         pass
     exit()
 
 def alltree():
-#    while True:
     try:
         for root, directories, files in os.walk(path, topdown=False):
             for name in files:
@@ -97,7 +71,6 @@ def alltree():
                 if not name.startswith('.'):
                     try:
                         with open(str(os.path.join(root, name)), 'r') as f: 
-                            #print(f.read())
                             while True:
                                 next_line = f.readline()
                                 if not next_line:
@@ -109,18 +82,13 @@ def alltree():
                                         print(char, end='', flush=True)
                                         time.sleep(args.pace)
                                         time.sleep(0.003)
-                                if args.line and args.sleep == 51:
-                                    time.sleep(SLEEPTIME*2)
-                                else:
-                                    time.sleep(SLEEPTIME)
+                                time.sleep(SLEEPTIME)
                             f.close()
                     except:
                         pass
     except:
         pass
-try:
-    #if args.file.name == '<stdin>':
-        
+try:        
     if args.file:
         while True:
             if not args.file.name == '<stdin>':
@@ -130,7 +98,6 @@ try:
                 print("END")
                 break;
         args.file.close()
-        #exit()
     else:
         while True:
             path = './'
@@ -138,10 +105,7 @@ try:
             if not args.loop:
                 print("END")
                 break;
-        #exit()
+            
 except KeyboardInterrupt:
         #raise SystemExit
         sys.exit()
-            #print(os.path.join(root, name))
-        #for name in directories:
-        #	print(os.path.join(root, name))
