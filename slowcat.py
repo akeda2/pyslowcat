@@ -65,7 +65,9 @@ def oldshit():
 
 def alltree():
     try:
-        for root, directories, files in os.walk(path, topdown=False):
+        for root, directories, files in os.walk(path, topdown=True):
+            if '.git' in directories:
+                directories.remove('.git')
             for name in files:
                 print(name)
                 if not name.startswith('.'):
