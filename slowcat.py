@@ -15,7 +15,7 @@ parser.add_argument("-c", "--char", action="store_true", help="Character mode")
 parser.add_argument("-l", "--line", default=True, action="store_true", help="Line mode")
 parser.add_argument("-s", "--sleep", default=51, type=int, help="Time to sleep between lines")
 parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace (sleep between chars)")
-parser.add_argument("-L", "--loop", default=False, action="store_true", help="Loop contents")
+parser.add_argument("-L", "--loop", default=True, action="store_true", help="Loop contents")
 args = parser.parse_args()
 config = vars(args)
 print("slowcat - arguments:")
@@ -64,7 +64,6 @@ def oldshit():
             f.close()
     except:
         pass
-    exit()
 
 def alltree():
     try:
@@ -89,10 +88,10 @@ def alltree():
                                         time.sleep(0.003)
                                 time.sleep(SLEEPTIME)
                             f.close()
-                    except KeyboardInterrupt:
-                        raise SystemExit
-    except:
-        pass
+                    except:
+                        raise
+    except KeyboardInterrupt:
+        raise SystemExit
 try:        
     if args.file:
         while True:
@@ -106,11 +105,14 @@ try:
     else:
         while True:
             path = './'
-            alltree()
-            if not args.loop:
-                print("END")
-                break;
-            
+            try:
+                alltree()
+                if not args.loop:
+                    print("END")
+                    break;
+            except KeyboardInterrupt:
+                raise SystemExit
+
 except KeyboardInterrupt:
-        raise SystemExit
-        #sys.exit()
+    raise SystemExit
+    #exit()
