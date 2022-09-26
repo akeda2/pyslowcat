@@ -30,18 +30,21 @@ if args.line and args.sleep == 51:
     SLEEPTIME *= 2
     
 def onefile():
-    while True:
-        next_line = args.file.readline()
-        if not next_line:
-            break;
-        if args.line:
-            print(next_line.strip("\n"))
-        elif args.char:
-            for char in next_line:
-                print(char, end='', flush=True)
-                time.sleep(args.pace)
-                time.sleep(0.003)
-        time.sleep(SLEEPTIME)
+    try:
+        while True:
+            next_line = args.file.readline()
+            if not next_line:
+                break;
+            if args.line:
+                print(next_line.strip("\n"))
+            elif args.char:
+                for char in next_line:
+                    print(char, end='', flush=True)
+                    time.sleep(args.pace)
+                    time.sleep(0.003)
+            time.sleep(SLEEPTIME)
+    except KeyboardInterrupt:
+        raise SystemExit
 
 def oldshit():
     try:
@@ -86,8 +89,8 @@ def alltree():
                                         time.sleep(0.003)
                                 time.sleep(SLEEPTIME)
                             f.close()
-                    except:
-                        pass
+                    except KeyboardInterrupt:
+                        raise SystemExit
     except:
         pass
 try:        
@@ -109,5 +112,5 @@ try:
                 break;
             
 except KeyboardInterrupt:
-        #raise SystemExit
-        sys.exit()
+        raise SystemExit
+        #sys.exit()
