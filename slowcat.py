@@ -18,7 +18,7 @@ parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-m
 parser.add_argument("-L", "--loop", default=True, action="store_true", help="Loop contents")
 args = parser.parse_args()
 config = vars(args)
-print("slowcat - arguments:")
+#print("slowcat - arguments:")
 print(config)
 
 if args.char:
@@ -28,7 +28,9 @@ time.sleep(2)
 SLEEPTIME = args.sleep / 1000
 if args.line and args.sleep == 51:
     SLEEPTIME *= 2
-    
+ 
+exclude_prefixes = ('__', '.')
+
 def onefile():
     try:
         while True:
@@ -68,10 +70,16 @@ def oldshit():
 def alltree():
     try:
         for root, directories, files in os.walk(path, topdown=True):
-            if '.git' in directories:
-                directories.remove('.git')
+            directories[:] = [directories
+                             for directories in directories
+                             if not directories.startswith(exclude_prefixes)]
+            files[:] = [files
+                        for files in files
+                        if not files.startswith(exclude_prefixes)]
+            #if '.git' in directories:
+            #    directories.remove('.git')
             for name in files:
-                print(name)
+                print(root,name, '\n')
                 if not name.startswith('.'):
                     try:
                         with open(str(os.path.join(root, name)), 'r') as f: 
