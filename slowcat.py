@@ -99,6 +99,7 @@ def alltree():
                                             time.sleep(args.pace)
                                             time.sleep(0.003)
                                 except:
+                                    break;
                                     pass
                                 time.sleep(SLEEPTIME)
                         f.close()
