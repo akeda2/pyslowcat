@@ -83,26 +83,30 @@ def alltree():
                 #if not name.startswith('.'):
                 try:
                     if os.path.isfile(os.path.join(root, name)):
-                        with open(str(os.path.join(root, name)), 'r') as f: 
-                            #if os.path.isfile(f.name):
-                                #print(f.name)
-                            while True:
-                                try:
-                                    next_line = f.readline()
-                                    if not next_line:
+                        try:
+                            with open(str(os.path.join(root, name)), 'r') as f: 
+                                #if os.path.isfile(f.name):
+                                    #print(f.name)
+                                while True:
+                                    try:
+                                        next_line = f.readline()
+                                        if not next_line:
+                                            break;
+                                        if args.line:
+                                            print(next_line.strip("\n"))
+                                        elif args.char:
+                                            for char in next_line:
+                                                print(char, end='', flush=True)
+                                                time.sleep(args.pace)
+                                                time.sleep(0.003)
+                                    except:
                                         break;
-                                    if args.line:
-                                        print(next_line.strip("\n"))
-                                    elif args.char:
-                                        for char in next_line:
-                                            print(char, end='', flush=True)
-                                            time.sleep(args.pace)
-                                            time.sleep(0.003)
-                                except:
-                                    break;
-                                    pass
-                                time.sleep(SLEEPTIME)
-                        f.close()
+                                        pass
+                                    time.sleep(SLEEPTIME)
+                            f.close()
+                        except OSError:
+                            print("Could not read file")
+                            pass
                 except:
                     raise
     except KeyboardInterrupt:
