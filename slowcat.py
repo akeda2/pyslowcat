@@ -33,18 +33,28 @@ exclude_prefixes = ('__', '.')
 
 def onefile():
     try:
-        while True:
-            next_line = args.file.readline()
-            if not next_line:
-                break;
-            if args.line:
-                print(next_line.strip("\n"))
-            elif args.char:
-                for char in next_line:
-                    print(char, end='', flush=True)
-                    time.sleep(args.pace)
-                    time.sleep(0.003)
-            time.sleep(SLEEPTIME)
+        if os.path.isfile(os.path.join(root, name)):
+            try:
+                while True:
+                    try:
+                        next_line = args.file.readline()
+                        if not next_line:
+                            break;
+                        if args.line:
+                            print(next_line.strip("\n"))
+                        elif args.char:
+                            for char in next_line:
+                                print(char, end='', flush=True)
+                                time.sleep(args.pace)
+                                time.sleep(0.003)
+                        time.sleep(SLEEPTIME)
+                    except KeyboardInterrupt:
+                        raise SystemExit
+                    except:
+                        break;
+            except OSError:
+                print("Could not read file")
+                pass
     except KeyboardInterrupt:
         raise SystemExit
 
@@ -85,8 +95,6 @@ def alltree():
                     if os.path.isfile(os.path.join(root, name)):
                         try:
                             with open(str(os.path.join(root, name)), 'r') as f: 
-                                #if os.path.isfile(f.name):
-                                    #print(f.name)
                                 while True:
                                     try:
                                         next_line = f.readline()
@@ -103,7 +111,6 @@ def alltree():
                                         raise SystemExit
                                     except:
                                         break;
-                                        pass
                                     time.sleep(SLEEPTIME)
                             f.close()
                         except OSError:
