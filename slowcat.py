@@ -98,7 +98,9 @@ def alltree():
                                             for char in next_line:
                                                 print(char, end='', flush=True)
                                                 time.sleep(args.pace)
-                                                time.sleep(0.003)
+                                                #time.sleep(0.003)
+                                    except KeyboardInterrupt:
+                                        raise SystemExit
                                     except:
                                         break;
                                         pass
