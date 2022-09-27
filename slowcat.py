@@ -87,16 +87,19 @@ def alltree():
                             #if os.path.isfile(f.name):
                                 #print(f.name)
                             while True:
-                                next_line = f.readline()
-                                if not next_line:
-                                    break;
-                                if args.line:
-                                    print(next_line.strip("\n"))
-                                elif args.char:
-                                    for char in next_line:
-                                        print(char, end='', flush=True)
-                                        time.sleep(args.pace)
-                                        time.sleep(0.003)
+                                try:
+                                    next_line = f.readline()
+                                    if not next_line:
+                                        break;
+                                    if args.line:
+                                        print(next_line.strip("\n"))
+                                    elif args.char:
+                                        for char in next_line:
+                                            print(char, end='', flush=True)
+                                            time.sleep(args.pace)
+                                            time.sleep(0.003)
+                                except:
+                                    pass
                                 time.sleep(SLEEPTIME)
                         f.close()
                 except:
