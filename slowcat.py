@@ -80,9 +80,11 @@ def alltree():
             #    directories.remove('.git')
             for name in files:
                 print(root,name, '\n')
-                if not name.startswith('.'):
-                    try:
-                        with open(str(os.path.join(root, name)), 'r') as f: 
+                #if not name.startswith('.'):
+                try:
+                    with open(str(os.path.join(root, name)), 'r') as f: 
+                        if os.path.isfile(f.name):
+                            #print(f.name)
                             while True:
                                 next_line = f.readline()
                                 if not next_line:
@@ -95,9 +97,9 @@ def alltree():
                                         time.sleep(args.pace)
                                         time.sleep(0.003)
                                 time.sleep(SLEEPTIME)
-                            f.close()
-                    except:
-                        raise
+                        f.close()
+                except:
+                    raise
     except KeyboardInterrupt:
         raise SystemExit
 try:        
