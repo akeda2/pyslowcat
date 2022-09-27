@@ -30,7 +30,9 @@ if args.line and args.sleep == 51:
     SLEEPTIME *= 2
  
 exclude_prefixes = ('__', '.')
-
+def ttysane():
+    if platform.system() != "Windows":
+        os.system('stty sane')
 def onefile():
     try:
         if os.path.isfile(args.file.name):
@@ -48,6 +50,7 @@ def onefile():
                                 time.sleep(args.pace)
                         time.sleep(SLEEPTIME)
                     except KeyboardInterrupt:
+                        ttysane()
                         raise SystemExit
                     except:
                         break;
@@ -55,6 +58,7 @@ def onefile():
                 print("Could not read file")
                 pass
     except KeyboardInterrupt:
+        ttysane()
         raise SystemExit
 
 def oldshit():
@@ -105,6 +109,7 @@ def alltree():
                                                 print(char, end='', flush=True)
                                                 time.sleep(args.pace)
                                     except KeyboardInterrupt:
+                                        ttysane()
                                         raise SystemExit
                                     except:
                                         break;
@@ -116,6 +121,7 @@ def alltree():
                 except:
                     raise
     except KeyboardInterrupt:
+        ttysane()
         raise SystemExit
 try:        
     if args.file:
@@ -132,14 +138,14 @@ try:
             path = './'
             try:
                 alltree()
-                if platform.system() != "Windows":
-                    os.system('stty sane')
                 if not args.loop:
                     print("END")
                     break;
             except KeyboardInterrupt:
+                ttysane()
                 raise SystemExit
 
 except KeyboardInterrupt:
+    ttysane()
     raise SystemExit
     #exit()
