@@ -82,9 +82,10 @@ def alltree():
                 print(root,name, '\n')
                 #if not name.startswith('.'):
                 try:
-                    with open(str(os.path.join(root, name)), 'r') as f: 
-                        if os.path.isfile(f.name):
-                            #print(f.name)
+                    if os.path.isfile(os.path.join(root, name)):
+                        with open(str(os.path.join(root, name)), 'r') as f: 
+                            #if os.path.isfile(f.name):
+                                #print(f.name)
                             while True:
                                 next_line = f.readline()
                                 if not next_line:
