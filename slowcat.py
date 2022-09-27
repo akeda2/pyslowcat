@@ -84,7 +84,9 @@ def alltree():
                         for files in files
                         if not files.startswith(exclude_prefixes)]
             for name in files:
-                print(root,name, '\n')
+                print(root+name)
+            for name in files:
+                print('\n',root+name, '\n')
                 try:
                     if os.path.isfile(os.path.join(root, name)):
                         try:
