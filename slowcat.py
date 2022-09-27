@@ -32,7 +32,7 @@ exclude_prefixes = ('__', '.')
 
 def onefile():
     try:
-        if os.path.isfile(args.file):
+        if os.path.isfile(args.file.name):
             try:
                 while True:
                     try:
