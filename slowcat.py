@@ -32,7 +32,7 @@ exclude_prefixes = ('__', '.')
 
 def onefile():
     try:
-        if os.path.isfile(os.path.join(root, name)):
+        if os.path.isfile(args.file):
             try:
                 while True:
                     try:
@@ -83,10 +83,11 @@ def alltree():
             files[:] = [files
                         for files in files
                         if not files.startswith(exclude_prefixes)]
+            
             for name in files:
-                print(root+name)
+                print(root+'/'+name)
             for name in files:
-                print('\n',root+name, '\n')
+                print('\n',root+'/'+name, '\n')
                 try:
                     if os.path.isfile(os.path.join(root, name)):
                         try:
