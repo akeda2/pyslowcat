@@ -4,6 +4,7 @@ import os
 import time
 import sys
 import argparse
+import platform
 
 
 
@@ -131,6 +132,8 @@ try:
             path = './'
             try:
                 alltree()
+                if platform.system() != "Windows":
+                    os.system('stty sane')
                 if not args.loop:
                     print("END")
                     break;
