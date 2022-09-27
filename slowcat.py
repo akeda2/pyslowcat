@@ -18,7 +18,6 @@ parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-m
 parser.add_argument("-L", "--loop", default=False, action="store_true", help="Loop contents")
 args = parser.parse_args()
 config = vars(args)
-#print("slowcat - arguments:")
 print(config)
 
 if args.char:
@@ -46,7 +45,6 @@ def onefile():
                             for char in next_line:
                                 print(char, end='', flush=True)
                                 time.sleep(args.pace)
-                                time.sleep(0.003)
                         time.sleep(SLEEPTIME)
                     except KeyboardInterrupt:
                         raise SystemExit
@@ -71,7 +69,6 @@ def oldshit():
                     for char in next_line:
                         print(char, end='', flush=True)
                         time.sleep(args.pace)
-                        time.sleep(0.003)
                 time.sleep(SLEEPTIME)
             f.close()
     except:
@@ -86,11 +83,8 @@ def alltree():
             files[:] = [files
                         for files in files
                         if not files.startswith(exclude_prefixes)]
-            #if '.git' in directories:
-            #    directories.remove('.git')
             for name in files:
                 print(root,name, '\n')
-                #if not name.startswith('.'):
                 try:
                     if os.path.isfile(os.path.join(root, name)):
                         try:
@@ -106,7 +100,6 @@ def alltree():
                                             for char in next_line:
                                                 print(char, end='', flush=True)
                                                 time.sleep(args.pace)
-                                                #time.sleep(0.003)
                                     except KeyboardInterrupt:
                                         raise SystemExit
                                     except:
