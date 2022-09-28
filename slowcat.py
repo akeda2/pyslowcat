@@ -33,6 +33,8 @@ exclude_prefixes = ('__', '.')
 def ttysane():
     if platform.system() != "Windows":
         os.system('stty sane')
+def printfile(file):
+    pass
 def onefile():
     try:
         if os.path.isfile(args.file.name):
