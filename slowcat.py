@@ -33,8 +33,35 @@ exclude_prefixes = ('__', '.')
 def ttysane():
     if platform.system() != "Windows":
         os.system('stty sane')
-def printfile(file):
-    pass
+def printfile(myfile):
+    try:
+        if os.path.isfile(myfile):
+            with open(str(os.path.join(myfile)), 'r') as f:
+                try:
+                    while True:
+                        try:
+                            next_line = f.readline()
+                            if not next_line:
+                                break;
+                            if args.line:
+                                print(next_line.strip("\n"))
+                            elif args.char:
+                                for char in next_line:
+                                    print(char, end='', flush=True)
+                                    time.sleep(args.pace)
+                            time.sleep(SLEEPTIME)
+                        except KeyboardInterrupt:
+                            ttysane()
+                            raise SystemExit
+                        except:
+                            break;
+                except OSError:
+                    print("Could not read file")
+                    pass
+    except KeyboardInterrupt:
+        ttysane()
+        raise SystemExit
+
 def onefile():
     try:
         if os.path.isfile(args.file.name):
@@ -80,7 +107,26 @@ def oldshit():
             f.close()
     except:
         pass
-
+def alltreeNG():
+    try:
+        for root, directories, files in os.walk(path, topdown=True):
+            directories[:] = [directories
+                             for directories in directories
+                             if not directories.startswith(exclude_prefixes)]
+            files[:] = [files
+                        for files in files
+                        if not files.startswith(exclude_prefixes)]
+            
+            for name in files:
+                print(root+'/'+name)
+            for name in files:
+                print('\n',root+'/'+name, '\n')
+                try:
+                    printfile(os.path.join(root, name))
+                except:
+                    raise
+    except:
+        raise
 def alltree():
     try:
         for root, directories, files in os.walk(path, topdown=True):
@@ -130,7 +176,8 @@ try:
         while True:
             if not args.file.name == '<stdin>':
                 args.file.seek(0)
-            onefile()
+            #onefile()
+            printfile(args.file)
             if not args.loop or args.file.name == '<stdin>':
                 print("END")
                 break;
@@ -139,7 +186,8 @@ try:
         while True:
             path = './'
             try:
-                alltree()
+                #alltree()
+                alltreeNG()
                 if not args.loop:
                     print("END")
                     break;
