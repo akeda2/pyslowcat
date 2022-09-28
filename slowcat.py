@@ -33,10 +33,14 @@ exclude_prefixes = ('__', '.')
 def ttysane():
     if platform.system() != "Windows":
         os.system('stty sane')
+
+
+### Rewrite
 def printfile(myfile):
     try:
-        if os.path.isfile(myfile):
-            with open(str(os.path.join(myfile)), 'r') as f:
+        if os.path.isfile(myfile.name):
+            #with open(str(os.path.join(myfile)), 'r') as f:
+            with open(myfile.name, 'r') as f:
                 try:
                     while True:
                         try:
@@ -58,6 +62,7 @@ def printfile(myfile):
                 except OSError:
                     print("Could not read file")
                     pass
+            f.close()
     except KeyboardInterrupt:
         ttysane()
         raise SystemExit
@@ -174,8 +179,8 @@ def alltree():
 try:        
     if args.file:
         while True:
-            if not args.file.name == '<stdin>':
-                args.file.seek(0)
+            #if not args.file.name == '<stdin>':
+             #   args.file.seek(0)
             #onefile()
             printfile(args.file)
             if not args.loop or args.file.name == '<stdin>':
