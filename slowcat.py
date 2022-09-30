@@ -35,7 +35,7 @@ def ttysane():
         os.system('stty sane')
 def onefile():
     try:
-        if os.path.isfile(args.file.name):
+        if os.path.isfile(args.file.name) or args.file.name == '<stdin>':
             try:
                 while True:
                     try:
