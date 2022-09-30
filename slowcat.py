@@ -57,6 +57,8 @@ def onefile():
             except OSError:
                 print("Could not read file")
                 pass
+        else:
+            print("Not a file!")
     except KeyboardInterrupt:
         ttysane()
         raise SystemExit
