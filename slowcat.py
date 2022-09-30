@@ -17,6 +17,7 @@ parser.add_argument("-l", "--line", default=True, action="store_true", help="Lin
 parser.add_argument("-s", "--sleep", default=51, type=int, help="Time to sleep between lines")
 parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace (sleep between chars)")
 parser.add_argument("-L", "--loop", default=False, action="store_true", help="Loop contents")
+parser.add_argument("-b", "--bell", default=False, action="store_true", help="Bell sound on newline")
 args = parser.parse_args()
 config = vars(args)
 print(config)
@@ -43,6 +44,8 @@ def onefile():
                         if not next_line:
                             break;
                         if args.line:
+                            if args.bell:
+                                print('\a')
                             print(next_line.strip("\n"))
                         elif args.char:
                             for char in next_line:
