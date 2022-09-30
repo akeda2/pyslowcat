@@ -111,7 +111,8 @@ def alltree():
                                         if not next_line:
                                             break;
                                         if args.line:
-                                            print(next_line.strip("\n"))
+                                            #print(next_line.strip("\n"))
+                                            print(next_line, end='', flush=True)
                                         elif args.char:
                                             for char in next_line:
                                                 print(char, end='', flush=True)
