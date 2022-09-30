@@ -46,7 +46,6 @@ def onefile():
                         if args.line:
                             if args.bell:
                                 print('\a', end='', flush=True)
-                            #print(next_line.strip("\n"), end='', flush=True)
                             print(next_line, end='', flush=True)
                         elif args.char:
                             if args.bell:
@@ -68,24 +67,6 @@ def onefile():
     except KeyboardInterrupt:
         ttysane()
         raise SystemExit
-
-def oldshit():
-    try:
-        with open((args.filename), 'r') as f:
-            while True:
-                next_line = f.readline()
-                if not next_line:
-                    break;
-                if args.line:
-                    print(next_line.strip("\n"))
-                elif args.char:
-                    for char in next_line:
-                        print(char, end='', flush=True)
-                        time.sleep(args.pace)
-                time.sleep(SLEEPTIME)
-            f.close()
-    except:
-        pass
 
 def alltree():
     try:
