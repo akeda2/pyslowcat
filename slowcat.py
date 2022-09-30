@@ -46,7 +46,8 @@ def onefile():
                         if args.line:
                             if args.bell:
                                 print('\a', end='', flush=True)
-                            print(next_line.strip("\n"))
+                            #print(next_line.strip("\n"), end='', flush=True)
+                            print(next_line, end='', flush=True)
                         elif args.char:
                             if args.bell:
                                 print('\a', end='', flush=True)
