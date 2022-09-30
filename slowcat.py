@@ -45,9 +45,11 @@ def onefile():
                             break;
                         if args.line:
                             if args.bell:
-                                print('\a')
+                                print('\a', end='', flush=True)
                             print(next_line.strip("\n"))
                         elif args.char:
+                            if args.bell:
+                                print('\a', end='', flush=True)
                             for char in next_line:
                                 print(char, end='', flush=True)
                                 time.sleep(args.pace)
