@@ -20,7 +20,7 @@ optional arguments:
   -L, --loop            Loop contents (default: False)
   -b, --bell            Bell sound on newline (default: False)
 ```
-###Examples:
+### Examples:
 ```
 Follow syslog with a bell on each newline:
 tail -f -n 10 /var/log/syslog | slowcat -cb -
