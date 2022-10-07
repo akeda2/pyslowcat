@@ -20,20 +20,29 @@ parser.add_argument("-L", "--loop", default=False, action="store_true", help="Lo
 parser.add_argument("-b", "--bell", default=False, action="store_true", help="Bell sound on newline")
 args = parser.parse_args()
 config = vars(args)
-print(config)
 
+# If we choose character mode, list line mode as False:
 if args.char:
     args.line = False
-
+# Print config and sleep for n seconds:
+print(config)
 time.sleep(2)
+
+# From mS to S:
 SLEEPTIME = args.sleep / 1000
+# 102 mS is default for line mode, we are using 51*2 and using 51 for character mode:
 if args.line and args.sleep == 51:
     SLEEPTIME *= 2
  
+# We don't want to show hidden and garbage files:
 exclude_prefixes = ('__', '.')
+
+# Sanitize TTY:
 def ttysane():
     if platform.system() != "Windows":
         os.system('stty sane')
+
+# Use argparse inbuilt file reader for single files:
 def onefile():
     try:
         if os.path.isfile(args.file.name) or args.file.name == '<stdin>':
@@ -68,6 +77,7 @@ def onefile():
         ttysane()
         raise SystemExit
 
+# Use os.walk with with open for recursive tree mode:
 def alltree():
     try:
         for root, directories, files in os.walk(path, topdown=True):
