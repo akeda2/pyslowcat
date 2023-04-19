@@ -16,7 +16,7 @@ del:
 # Clear pyinstall cache and delete file
 clean:
 	#pyinstaller --clean slowcat.py
-	rm -rf ./dist/ ./build/ ./*.spec ./*.pyc ./*.log slowcat.spec dist/ eb
+	rm -rf ./dist/ ./build/ ./*.spec ./*.pyc ./*.log slowcat.spec dist/ slowcat
 
 PREFIX ?= /usr/local
 BINDIR ?= $(PREFIX)/bin
