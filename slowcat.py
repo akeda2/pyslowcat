@@ -25,8 +25,8 @@ config = vars(args)
 if args.char:
     args.line = False
 # Print config and sleep for n seconds:
-print(config)
-time.sleep(2)
+#print(config)
+#time.sleep(2)
 
 # From mS to S:
 SLEEPTIME = args.sleep / 1000
@@ -130,7 +130,7 @@ try:
                 args.file.seek(0)
             onefile()
             if not args.loop or args.file.name == '<stdin>':
-                print("END")
+                #print("END")
                 break;
         args.file.close()
     else:
@@ -139,7 +139,7 @@ try:
             try:
                 alltree()
                 if not args.loop:
-                    print("END")
+                    #print("END")
                     break;
             except KeyboardInterrupt:
                 ttysane()
