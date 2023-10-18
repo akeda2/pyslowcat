@@ -1,8 +1,6 @@
-#!/usr/bin/python3
-from ast import Try
+#!/usr/bin/env python3
 import os
 import time
-import sys
 import argparse
 import platform
 
