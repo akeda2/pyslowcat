@@ -6,7 +6,7 @@ all: slowcat del
 
 # Create slowcat executable
 slowcat:
-	pyinstaller --clean slowcat.py -F
+	pyinstaller --clean slowcat.py -F --noupx
 	mv dist/slowcat .
 
 # Remove files created by pyinstaller
