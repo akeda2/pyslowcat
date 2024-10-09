@@ -93,7 +93,7 @@ def alltree(args,SLEEPTIME):
                 file_path = os.path.join(root, name)
                 print(f"\nProcessing {file_path}\n")
                 try:
-                    with open(file_path, 'r') as f:
+                    with open(file_path, 'r', errors='replace') as f:
                         process_file(f, args, SLEEPTIME)
                 except OSError:
                     print(f"Could not read file: {file_path}")
@@ -158,7 +158,7 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-c", "--char", action="store_true", help="Character mode")
     group.add_argument("-l", "--line", action="store_true", help="Line mode (default)", default=True)
-    parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r'),
+    parser.add_argument('file', default=None, nargs='?', type=argparse.FileType('r', errors='replace'),
                         help="Filename or '-' for stdin. If omitted, walk tree")
     parser.add_argument("-s", "--sleep", type=int, help="Time to sleep between lines (ms)")
     parser.add_argument("-p", "--pace", default=0.003, type=float, help="Character-mode pace (sleep between chars)")
